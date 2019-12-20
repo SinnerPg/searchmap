@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import GoogleMapReact from "google-map-react";
 
 export const Body = styled.div`
   margin-left: 71px;
@@ -15,9 +16,15 @@ export const LoadFile = styled.input.attrs(props => ({
   position: absolute;
   z-index: -1;
 `;
-export const FirstButtons = styled.div`
+export const InitialButtons = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const FlexMap = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const ContainerLoadFileLabel = styled.div`
@@ -46,14 +53,7 @@ export const MapDiv = styled.div`
   overflow: hidden;
 `;
 
-export const Map = styled.iframe`
-border:0;
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-`;
+export const GoogleMap = styled(GoogleMapReact)``;
 
 export const ResidentsLabel = styled.label`
   border: none;
@@ -76,7 +76,7 @@ export const LoadFileLabel = styled.label`
   cursor: pointer;
 `;
 
-export const RegularText = styled.p`
+export const AddressText = styled.p`
   font-size: 20px;
   margin-top: 30px;
   text-decoration: none;
@@ -84,6 +84,33 @@ export const RegularText = styled.p`
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   display: inline-block;
+`;
+
+export const Range = styled.input.attrs(props => ({
+  type: "range",
+  min: 0,
+  max: 3000,
+  step: 300
+}))``;
+
+export const RangeTextBox = styled.input.attrs(props => ({
+  type: "text"
+}))`
+  width: 50px;
+  height: 42px;
+  margin-left: 35px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+`;
+
+export const RangeText = styled.p`
+  margin-left: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
 `;
 
 export const DistanceText = styled.p`
@@ -95,14 +122,4 @@ export const DistanceText = styled.p`
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   display: inline-block;
-`;
-
-export const SelectAddress = styled.select`
-  width: 520px;
-  height: 42px;
-  font-size: 20px;
-  margin-top: 16px;
-  text-decoration: none;
-  color: black;
-  font-family: "Helvetica Neue", sans-serif;
 `;
