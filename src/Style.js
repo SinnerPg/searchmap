@@ -37,8 +37,19 @@ export const ContainerLoadFileLabel = styled.div`
   display: flex;
 `;
 
-export const DBResident = styled.div`
-  background-color: #9d9eaa;
+export const SearchAddressButton = styled.div`
+  background-color: #7692d3;
+  border: none;
+  margin-left: 11px;
+  width: 349px;
+  height: 61px;
+  align-items: center;
+  display: flex;
+`;
+
+export const LeftButton = styled.div.attrs(props => ({
+  backgroundColor: props.color
+}))`
   border: none;
   width: 347px;
   height: 61px;
@@ -65,6 +76,16 @@ export const ResidentsLabel = styled.label`
   font-family: "Montserrat", sans-serif;
 `;
 
+export const AddressLabel = styled.label`
+  border: none;
+  font-size: 25px;
+  padding-left: 28px;
+  padding-right: 66px;
+  margin: 0 auto;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+`;
+
 export const LoadFileLabel = styled.label`
   border: none;
   font-size: 28px;
@@ -75,6 +96,24 @@ export const LoadFileLabel = styled.label`
   font-family: "Montserrat", sans-serif;
   cursor: pointer;
 `;
+
+export const SearchAddressLabel = styled.label`
+  border: none;
+  font-size: 28px;
+  padding-left: 64px;
+  padding-right: 60px;
+  margin: 0 auto;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+`;
+
+export const AddressTextArea = styled.textarea`
+  width: 1196px;
+  height: 341px;
+  margin-top: 26px;
+  resize: none;
+`
 
 export const AddressText = styled.p`
   font-size: 20px;
@@ -89,8 +128,8 @@ export const AddressText = styled.p`
 export const Range = styled.input.attrs(props => ({
   type: "range",
   min: 0,
-  max: 3000,
-  step: 300
+  max: 2000,
+  step: 200
 }))``;
 
 export const RangeTextBox = styled.input.attrs(props => ({
@@ -122,4 +161,36 @@ export const DistanceText = styled.p`
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   display: inline-block;
+`;
+
+export const GoogleMarker = styled.div.attrs(props => ({
+  backgroundColor: props.color
+}))`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  &:hover {
+    z-index: 1;
+  }
+`;
+
+export const RangeCircle = styled.div.attrs(props => ({
+  width: props.width,
+  height: props.height,
+}))`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  z-index: 3;
+  border: 1px solid red;
+  user-select: none;
+  transform: translate(-50%, -50%);
 `;

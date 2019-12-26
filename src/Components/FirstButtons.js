@@ -1,7 +1,7 @@
 import React from "react";
 import {
   LoadFile,
-  DBResident,
+  LeftButton,
   LoadFileLabel,
   InitialButtons,
   ContainerLoadFileLabel,
@@ -13,11 +13,11 @@ const { residents, loadCSV } = props;
   return (
       <>
         <InitialButtons>
-          <DBResident>
+          <LeftButton style={{ backgroundColor: "#9d9eaa"}}>
             <ResidentsLabel>
               Residenti in DB: <b>{residents}</b>
             </ResidentsLabel>
-          </DBResident>
+          </LeftButton>
           <LoadFile
             id="file"
             type="file"

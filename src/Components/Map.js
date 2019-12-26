@@ -1,25 +1,23 @@
 import React from "react";
-import GooglePlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import Marker from "./Marker";
+import RangeComponent from "./RangeComponent";
+import RangeMarker from "./RangeMarker";
 import "../App.css";
 import {
   MapDiv,
   GoogleMap,
   FlexMap,
-  Range,
-  RangeTextBox,
-  RangeText
 } from "../Style.js";
+import { meters2ScreenPixels } from 'google-map-react/utils';
 
 function Map(props) {
   const getMapOptions = {
     disableDefaultUI: true,
     mapTypeControl: false,
     streetViewControl: false,
-    minZoom: 14,
-    maxZoom: 14
+    minZoom: 15,
+    maxZoom: 20
   };
 
   const {
@@ -30,6 +28,12 @@ function Map(props) {
     distance,
     selectedAddress
   } = props;
+
+  const lat = center.lat;
+
+  const lng = center.lng;
+
+  const { w, h } = meters2ScreenPixels(distance*1000, { lat, lng }, zoom);
 
   return (
     <>
@@ -44,14 +48,10 @@ function Map(props) {
           }}
         />
         {selectedAddress && (
-          <>
-            <Range onChange={event => changeValue(event.target.value)} />
-            <RangeTextBox value={distance} />
-            <RangeText>Km</RangeText>
-          </>
+          <RangeComponent changeValue={changeValue} distance={distance} />
         )}
       </FlexMap>
-      <br></br>
+      <br />
       <MapDiv>
         <GoogleMap
           bootstrapURLKeys={{
@@ -60,7 +60,19 @@ function Map(props) {
           center={center}
           defaultZoom={zoom}
           options={getMapOptions}
-        ></GoogleMap>
+        >
+          {selectedAddress && (
+            <Marker lat={center.lat} lng={center.lng} color="red"></Marker>
+          )}
+          {selectedAddress && distance !== 0 && (
+            <RangeMarker
+              lat={center.lat}
+              lng={center.lng}
+              width={w*2}
+              height={h*2}
+            ></RangeMarker>
+          )}
+        </GoogleMap>
       </MapDiv>
     </>
   );

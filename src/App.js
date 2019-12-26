@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
-import GooglePlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from "react-google-places-autocomplete";
+import React, { useState } from "react";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import Map from "./Components/Map";
 import FirstButtons from "./Components/FirstButtons";
+import SecondButtons from "./Components/SecondButtons";
 import Papa from "papaparse";
-import { AddressText, Body, DistanceText } from "./Style.js";
+import { AddressText, Body, DistanceText, AddressTextArea } from "./Style.js";
 
 function App() {
   const [residents, setResidents] = useState(0);
 
-  const [address, setAddress] = useState([]);
+  const [address, setAddress] = useState(null);
 
   const [selectedAddress, setSelectedAddress] = useState(false);
 
@@ -19,13 +17,14 @@ function App() {
 
   const [center, setCenter] = useState({ lat: 40.8529221, lng: 14.2723433 });
 
-  const [zoom, setZoom] = useState(16);
+  const [zoom, setZoom] = useState(15);
+
+  const [textAreaValue, setTextAreaValue] = useState();
 
   const [distance, setDistance] = useState(0);
 
-  const updateData = result => {
+  const updateCsvData = result => {
     setResidents(kFormatter(result.data.length));
-    uniqueAddress(result.data);
   };
 
   const changeValue = value => {
@@ -37,7 +36,7 @@ function App() {
       header: true,
       download: true,
       skipEmptyLines: true,
-      complete: updateData
+      complete: updateCsvData
     });
     setUploaded(true);
   };
@@ -54,9 +53,11 @@ function App() {
 
   const uniqueAddress = result => {
     const uniqueTags = [];
-    result.map(item => {
-      if (uniqueTags.indexOf(item.Indirizzo) === -1) {
-        uniqueTags.push(item.Indirizzo);
+    result.elements.map(item => {
+      if (item.tags.name) {
+        if (uniqueTags.indexOf(item.tags.name) === -1) {
+          uniqueTags.push(item.tags.name);
+        }
       }
     });
     setAddress(uniqueTags);
@@ -67,6 +68,28 @@ function App() {
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => setCenter({ lat: lat, lng: lng }));
     setSelectedAddress(true);
+  };
+
+  const getNearbyAddress = async distance => {
+    const res = await fetch(
+      "https://overpass-api.de/api/interpreter?data=[out:json];way(around:" +
+        distance * 1000 +
+        "," +
+        center.lat +
+        "," +
+        center.lng +
+        ")[%22highway%22~%22secondary|tertiary|primary|residential%22];(._;way(r););out;"
+    );
+    await res
+      .json()
+      .then(result => uniqueAddress(result))
+      .then(
+        setTextAreaValue(
+          address.map(address => {
+            return address;
+          })
+        )
+      );
   };
 
   return (
@@ -86,6 +109,13 @@ function App() {
               distance={distance}
               selectedAddress={selectedAddress}
             />
+            <AddressText>INDIRIZZI VICINI</AddressText>
+            <SecondButtons
+              address={address}
+              distance={distance}
+              getNearbyAddress={getNearbyAddress}
+            />
+            <AddressTextArea readOnly value={textAreaValue} />
           </>
         ) : null}
       </Body>
