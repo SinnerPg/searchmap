@@ -17,7 +17,7 @@ function Map(props) {
     mapTypeControl: false,
     streetViewControl: false,
     minZoom: 15,
-    maxZoom: 20
+    maxZoom: 15
   };
 
   const {
@@ -58,7 +58,7 @@ function Map(props) {
             key: "AIzaSyC2Q3RQFcWWAZk30ctZRWYEIxveiAHsJKk"
           }}
           center={center}
-          defaultZoom={zoom}
+          zoom={zoom}
           options={getMapOptions}
         >
           {selectedAddress && (

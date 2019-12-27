@@ -9,6 +9,7 @@ import {
 
 function SecondButtons(props) {
   const { address, getNearbyAddress, distance } = props;
+
   return (
     <>
       <InitialButtons>

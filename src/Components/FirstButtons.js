@@ -9,13 +9,13 @@ import {
 } from "../Style.js";
 
 function FirstButtons(props) {
-const { residents, loadCSV } = props;
+const { residentsNumber, loadCSV } = props;
   return (
       <>
         <InitialButtons>
           <LeftButton style={{ backgroundColor: "#9d9eaa"}}>
             <ResidentsLabel>
-              Residenti in DB: <b>{residents}</b>
+              Residenti in DB: <b>{residentsNumber}</b>
             </ResidentsLabel>
           </LeftButton>
           <LoadFile

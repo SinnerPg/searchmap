@@ -16,6 +16,7 @@ export const LoadFile = styled.input.attrs(props => ({
   position: absolute;
   z-index: -1;
 `;
+
 export const InitialButtons = styled.div`
   display: flex;
   flex-direction: row;
@@ -32,6 +33,16 @@ export const ContainerLoadFileLabel = styled.div`
   border: none;
   margin-left: 11px;
   width: 349px;
+  height: 61px;
+  align-items: center;
+  display: flex;
+`;
+
+export const ContainerExportFileLabel = styled.div`
+  background-color: #76D3B3;
+  border: none;
+  margin-left: 11px;
+  width: 322px;
   height: 61px;
   align-items: center;
   display: flex;
@@ -86,11 +97,32 @@ export const AddressLabel = styled.label`
   font-family: "Montserrat", sans-serif;
 `;
 
+export const FoundResidents = styled.label`
+  border: none;
+  font-size: 25px;
+  padding-left: 28px;
+  padding-right: 24px;
+  margin: 0 auto;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+`;
+
 export const LoadFileLabel = styled.label`
   border: none;
   font-size: 28px;
   padding-left: 34px;
   padding-right: 30px;
+  margin: 0 auto;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+`;
+
+export const ExportFileLabel = styled.label`
+  border: none;
+  font-size: 25px;
+  padding-left: 75px;
+  padding-right: 73px;
   margin: 0 auto;
   color: white;
   font-family: "Montserrat", sans-serif;
@@ -112,6 +144,11 @@ export const AddressTextArea = styled.textarea`
   width: 1196px;
   height: 341px;
   margin-top: 26px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  padding-top: 32px;
+  padding-left: 28px;
+  white-space: pre-line;
   resize: none;
 `
 
@@ -122,6 +159,11 @@ export const AddressText = styled.p`
   color: #707070;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
+  display: inline-block;
+`;
+
+export const TextP = styled.p`
+  margin-top: 21px;
   display: inline-block;
 `;
 

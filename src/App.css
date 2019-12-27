@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 .google-places-autocomplete {
     width: 520px;   
     margin-top: 16px;   
 }
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
 
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
 .google-places-autocomplete__input {
     padding: 0px;
     width: 517px;
