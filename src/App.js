@@ -348,6 +348,7 @@ function App() {
             <Map
               center={center}
               zoom={zoom}
+              setZoom={setZoom}
               getCoordinates={getCoordinates}
               changeValue={changeValue}
               distance={distance}
@@ -360,6 +361,7 @@ function App() {
                   address={address}
                   distance={distance}
                   getNearbyAddress={getNearbyAddress}
+                  zoom={zoom}
                 />
                 <AddressTextArea
                   readOnly

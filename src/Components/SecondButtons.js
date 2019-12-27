@@ -8,7 +8,7 @@ import {
 } from "../Style.js";
 
 function SecondButtons(props) {
-  const { address, getNearbyAddress, distance } = props;
+  const { address, getNearbyAddress, distance, zoom } = props;
 
   return (
     <>
@@ -20,6 +20,9 @@ function SecondButtons(props) {
         </LeftButton>
         <SearchAddressButton onClick={() => getNearbyAddress(distance)}>
           <SearchAddressLabel>Cerca indirizzi</SearchAddressLabel>
+        </SearchAddressButton>
+        <SearchAddressButton onClick={() => console.log(zoom)}>
+          <SearchAddressLabel>Cerc</SearchAddressLabel>
         </SearchAddressButton>
       </InitialButtons>
     </>

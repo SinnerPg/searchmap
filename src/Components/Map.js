@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleMapReact from "google-map-react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import Marker from "./Marker";
 import RangeComponent from "./RangeComponent";
@@ -17,7 +18,7 @@ function Map(props) {
     mapTypeControl: false,
     streetViewControl: false,
     minZoom: 15,
-    maxZoom: 15
+    maxZoom: 20
   };
 
   const {
@@ -26,13 +27,16 @@ function Map(props) {
     zoom,
     changeValue,
     distance,
-    selectedAddress
+    selectedAddress,
+    setZoom
   } = props;
 
   const lat = center.lat;
 
   const lng = center.lng;
-
+  function handleZoomChanged(newZoom) {
+    setZoom(newZoom);
+  }
   const { w, h } = meters2ScreenPixels(distance*1000, { lat, lng }, zoom);
 
   return (
@@ -59,6 +63,7 @@ function Map(props) {
           }}
           center={center}
           zoom={zoom}
+          onZoomAnimationEnd={handleZoomChanged}
           options={getMapOptions}
         >
           {selectedAddress && (
