@@ -23,7 +23,8 @@ function Map(props) {
     changeValue,
     distance,
     selectedAddress,
-    setZoom
+    setZoom,
+    setDistance
   } = props;
 
   const lat = center.lat;
@@ -47,7 +48,7 @@ function Map(props) {
           }}
         />
         {selectedAddress && (
-          <RangeComponent changeValue={changeValue} distance={distance} />
+          <RangeComponent changeValue={changeValue} distance={distance} setDistance={setDistance} />
         )}
       </FlexMap>
       <br />

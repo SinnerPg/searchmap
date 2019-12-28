@@ -33,7 +33,7 @@ function App() {
 
   const [textAreaValue, setTextAreaValue] = useState(null); //Testo da stampare nella textArea. (Necessitavo per poter usare il break line correttamente)
 
-  const [distance, setDistance] = useState(0); //Raggio scelto per la ricerca
+  const [distance, setDistance] = useState(0.0); //Raggio scelto per la ricerca
 
   const updateCsvData = result => {
     let arrOfStr;
@@ -382,6 +382,7 @@ function App() {
               changeValue={changeValue}
               distance={distance}
               selectedAddress={selectedAddress}
+              setDistance={setDistance}
             />
             {selectedAddress && (
               <>
