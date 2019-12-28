@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import Map from "./Components/Map";
 import FirstButtons from "./Components/FirstButtons";
@@ -35,39 +35,17 @@ function App() {
 
   const [distance, setDistance] = useState(0.0); //Raggio scelto per la ricerca
 
+  useEffect(() => {
+    document.title = "Search Map AsteDirect";
+  }, []);
+
   const updateCsvData = result => {
     let arrOfStr;
     setResidentsNumber(kFormatter(result.data.length));
     setResidents(
       //Funzione che aggiorna lo stato con tutti i residenti del CV. Si impiega nella traduzione degli indirizzi
       result.data.map(item => {
-        if (
-          item.Indirizzo.split(" ")[2] === "EUCALIPTI" &&
-          item.Indirizzo.split(" ")[0] === "V.LE"
-        ) {
-          arrOfStr = item.Indirizzo.split(" ");
-          let array = "";
-          for (let i = 1; i < arrOfStr.length; i++) {
-            array = array + " " + arrOfStr[i];
-          }
-          return {
-            ...item,
-            Indirizzo: "VIA" + array
-          };
-        } else if (
-          item.Indirizzo.split(" ")[2] === "EUCALIPTI" &&
-          item.Indirizzo.split(" ")[0] === "VLE"
-        ) {
-          arrOfStr = item.Indirizzo.split(" ");
-          let array = "";
-          for (let i = 1; i < arrOfStr.length; i++) {
-            array = array + " " + arrOfStr[i];
-          }
-          return {
-            ...item,
-            Indirizzo: "VIA" + array
-          };
-        } else if (item.Indirizzo.split(" ")[0] === "V.") {
+        if (item.Indirizzo.split(" ")[0] === "V.") {
           arrOfStr = item.Indirizzo.split(" ");
           let array = "";
           for (let i = 1; i < arrOfStr.length; i++) {
@@ -309,11 +287,22 @@ function App() {
   };
 
   const getNearbyResidents = () => {
+    let arrOfStr, arrOfStr2;
     const uniqueTags = [];
     const uniqueTags2 = [];
     residents.map(item => {
       address.map(item2 => {
-        if (item2.toUpperCase() === item.Indirizzo) {
+        arrOfStr = item.Indirizzo.split(" ");
+        let array = "";
+        for (let i = 1; i < arrOfStr.length; i++) {
+          array = array + " " + arrOfStr[i];
+        }
+        arrOfStr2 = item2.toUpperCase().split(" ");
+        let array2 = "";
+        for (let i = 1; i < arrOfStr2.length; i++) {
+          array2 = array2 + " " + arrOfStr2[i];
+        }
+        if (array2 === array) {
           uniqueTags.push(
             item.Nome +
             " " +
@@ -372,7 +361,7 @@ function App() {
         {uploaded && (
           <>
             <AddressText>INDIRIZZO</AddressText>
-            <DistanceText>DISTANZA</DistanceText>
+            {selectedAddress && <DistanceText>DISTANZA</DistanceText>}
             <br />
             <Map
               center={center}

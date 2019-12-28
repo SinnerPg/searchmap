@@ -31,7 +31,10 @@ function ThirdButtons(props) {
             </FoundResidents>
           </LeftButton>
         )}
-        <SearchAddressButton onClick={() => getNearbyResidents()}>
+        <SearchAddressButton
+          style={{ marginLeft: !searchedResidents && 0 }}
+          onClick={() => getNearbyResidents()}
+        >
           <SearchAddressLabel>Cerca residenti</SearchAddressLabel>
         </SearchAddressButton>
         {searchedResidents && (

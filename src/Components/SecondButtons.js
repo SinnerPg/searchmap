@@ -20,7 +20,10 @@ function SecondButtons(props) {
             </AddressLabel>
           </LeftButton>
         )}
-        <SearchAddressButton onClick={() => getNearbyAddress(distance)}>
+        <SearchAddressButton
+          style={{ marginLeft: !searchedAddress && 0 }}
+          onClick={() => getNearbyAddress(distance)}
+        >
           <SearchAddressLabel>Cerca indirizzi</SearchAddressLabel>
         </SearchAddressButton>
       </InitialButtons>
