@@ -4,6 +4,7 @@ import GoogleMapReact from "google-map-react";
 export const Body = styled.div`
   margin-left: 71px;
   margin-top: 79px;
+  margin-right: 99px;
 `;
 
 export const LoadFile = styled.input.attrs(props => ({
@@ -95,6 +96,7 @@ export const AddressLabel = styled.label`
   margin: 0 auto;
   color: black;
   font-family: "Montserrat", sans-serif;
+  font-weight: 400;
 `;
 
 export const FoundResidents = styled.label`
@@ -141,10 +143,10 @@ export const SearchAddressLabel = styled.label`
 `;
 
 export const AddressTextArea = styled.textarea`
-  width: 1196px;
+  width: 1168px;
   height: 341px;
   margin-top: 26px;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   padding-top: 32px;
   padding-left: 28px;
@@ -155,10 +157,11 @@ export const AddressTextArea = styled.textarea`
 export const AddressText = styled.p`
   font-size: 20px;
   margin-top: 30px;
+  margin-bottom: 16px;
   text-decoration: none;
   color: #707070;
   font-family: "Open Sans", sans-serif;
-  font-weight: bold;
+  font-weight: 800;
   display: inline-block;
 `;
 
@@ -170,8 +173,7 @@ export const TextP = styled.p`
 export const Range = styled.input.attrs(props => ({
   type: "range",
   min: 0,
-  max: 2000,
-  step: 200
+  max: 2000
 }))``;
 
 export const RangeTextBox = styled.input.attrs(props => ({
@@ -201,7 +203,7 @@ export const DistanceText = styled.p`
   text-decoration: none;
   color: #707070;
   font-family: "Open Sans", sans-serif;
-  font-weight: bold;
+  font-weight: 800;
   display: inline-block;
 `;
 

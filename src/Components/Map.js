@@ -1,16 +1,11 @@
 import React from "react";
-import GoogleMapReact from "google-map-react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import Marker from "./Marker";
 import RangeComponent from "./RangeComponent";
 import RangeMarker from "./RangeMarker";
 import "../App.css";
-import {
-  MapDiv,
-  GoogleMap,
-  FlexMap,
-} from "../Style.js";
-import { meters2ScreenPixels } from 'google-map-react/utils';
+import { MapDiv, GoogleMap, FlexMap } from "../Style.js";
+import { meters2ScreenPixels } from "google-map-react/utils";
 
 function Map(props) {
   const getMapOptions = {
@@ -37,7 +32,7 @@ function Map(props) {
   function handleZoomChanged(newZoom) {
     setZoom(newZoom);
   }
-  const { w, h } = meters2ScreenPixels(distance*1000, { lat, lng }, zoom);
+  const { w, h } = meters2ScreenPixels(distance * 1000, { lat, lng }, zoom);
 
   return (
     <>
@@ -73,8 +68,8 @@ function Map(props) {
             <RangeMarker
               lat={center.lat}
               lng={center.lng}
-              width={w*2}
-              height={h*2}
+              width={w * 2}
+              height={h * 2}
             ></RangeMarker>
           )}
         </GoogleMap>

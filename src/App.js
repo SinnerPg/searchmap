@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import Map from "./Components/Map";
 import FirstButtons from "./Components/FirstButtons";
@@ -16,6 +16,8 @@ function App() {
   const [residents, setResidents] = useState(null); //Dati di tutti i residenti nel csv caricato
 
   const [searchedAddress, setSearchedAddress] = useState(false); //Booleana che permette di attivare la ricerca dei residenti
+
+  const [searchedResidents, setSearchedResidents] = useState(false); //Booleana che permette di attivare l'esportazione del csv
 
   const [csvAddress, setCsvAddress] = useState();
 
@@ -39,7 +41,33 @@ function App() {
     setResidents(
       //Funzione che aggiorna lo stato con tutti i residenti del CV. Si impiega nella traduzione degli indirizzi
       result.data.map(item => {
-        if (item.Indirizzo.split(" ")[0] === "V.") {
+        if (
+          item.Indirizzo.split(" ")[2] === "EUCALIPTI" &&
+          item.Indirizzo.split(" ")[0] === "V.LE"
+        ) {
+          arrOfStr = item.Indirizzo.split(" ");
+          let array = "";
+          for (let i = 1; i < arrOfStr.length; i++) {
+            array = array + " " + arrOfStr[i];
+          }
+          return {
+            ...item,
+            Indirizzo: "VIA" + array
+          };
+        } else if (
+          item.Indirizzo.split(" ")[2] === "EUCALIPTI" &&
+          item.Indirizzo.split(" ")[0] === "VLE"
+        ) {
+          arrOfStr = item.Indirizzo.split(" ");
+          let array = "";
+          for (let i = 1; i < arrOfStr.length; i++) {
+            array = array + " " + arrOfStr[i];
+          }
+          return {
+            ...item,
+            Indirizzo: "VIA" + array
+          };
+        } else if (item.Indirizzo.split(" ")[0] === "V.") {
           arrOfStr = item.Indirizzo.split(" ");
           let array = "";
           for (let i = 1; i < arrOfStr.length; i++) {
@@ -321,6 +349,7 @@ function App() {
     });
     setRangeResidents(uniqueTags);
     setCsvAddress(uniqueTags2);
+    setSearchedResidents(true);
   };
 
   const getNearbyAddress = async distance => {
@@ -362,6 +391,7 @@ function App() {
                   distance={distance}
                   getNearbyAddress={getNearbyAddress}
                   zoom={zoom}
+                  searchedAddress={searchedAddress}
                 />
                 <AddressTextArea
                   readOnly
@@ -376,6 +406,7 @@ function App() {
                       getNearbyResidents={getNearbyResidents}
                       kFormatter={kFormatter}
                       exportCSV={exportCSV}
+                      searchedResidents={searchedResidents}
                     />
                     <AddressTextArea
                       readOnly

@@ -10,22 +10,35 @@ import {
 } from "../Style.js";
 
 function ThirdButtons(props) {
-  const { rangeResidents, getNearbyResidents, kFormatter, exportCSV } = props;
+  const {
+    rangeResidents,
+    getNearbyResidents,
+    kFormatter,
+    exportCSV,
+    searchedResidents
+  } = props;
 
   return (
     <>
       <InitialButtons>
-        <LeftButton style={{ backgroundColor: "#F0F0F0" }}>
-          <FoundResidents>
-            Residenti trovati: <b>{rangeResidents !== null && kFormatter(rangeResidents.length)}</b>
-          </FoundResidents>
-        </LeftButton>
+        {searchedResidents && (
+          <LeftButton style={{ backgroundColor: "#F0F0F0" }}>
+            <FoundResidents>
+              Residenti trovati:{" "}
+              <b>
+                {rangeResidents !== null && kFormatter(rangeResidents.length)}
+              </b>
+            </FoundResidents>
+          </LeftButton>
+        )}
         <SearchAddressButton onClick={() => getNearbyResidents()}>
           <SearchAddressLabel>Cerca residenti</SearchAddressLabel>
         </SearchAddressButton>
+        {searchedResidents && (
           <ContainerExportFileLabel onClick={() => exportCSV()}>
             <ExportFileLabel>Esporta CSV</ExportFileLabel>
           </ContainerExportFileLabel>
+        )}
       </InitialButtons>
     </>
   );
