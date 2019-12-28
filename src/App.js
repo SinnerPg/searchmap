@@ -25,6 +25,8 @@ function App() {
 
   const [selectedAddress, setSelectedAddress] = useState(false); //Booleana che permette di attivare la ricerca degli indirizzi nel raggio
 
+  const [textSelectedAddress, setTextSelectedAddress] = useState(); //Booleana che permette di attivare la ricerca degli indirizzi nel raggio
+
   const [uploaded, setUploaded] = useState(false); //Booleana che permette di cercare l'indirizzo sulla mappa
 
   const [center, setCenter] = useState({ lat: 40.8529221, lng: 14.2723433 }); //Posiziona il centro della mappa Google
@@ -263,6 +265,7 @@ function App() {
   const uniqueAddress = result => {
     const uniqueTags = [];
     const uniqueTags2 = [];
+    uniqueTags.push(textSelectedAddress[0]);
     result.elements.map(item => {
       if (item.tags.name) {
         if (uniqueTags.indexOf(item.tags.name) === -1) {
@@ -281,6 +284,7 @@ function App() {
 
   const getCoordinates = async result => {
     await geocodeByAddress(result)
+      .then(setTextSelectedAddress(result.split(",")))
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => setCenter({ lat: lat, lng: lng })); //Funzione che posiziona la mappa sull'indirizzo scelto.
     setSelectedAddress(true);
